@@ -20,9 +20,6 @@ class ExcludeTimeZoneCollisionsTest {
     }
 
 
-    /*
-        уже вылетел без пересадок
-    */
     Flight getSimpleFlight() {
         LocalDateTime time = LocalDateTime.now().minusHours(1).truncatedTo(ChronoUnit.MINUTES);;
         Segment segment = new Segment(time, time.plusHours(3));
@@ -32,9 +29,6 @@ class ExcludeTimeZoneCollisionsTest {
         return flight;
     }
 
-    /*
-        вылетел в другой часовой пояс
-    */
     Flight getFlightWithTimeZoneCollisions() {
         LocalDateTime time1 = LocalDateTime.now().minusHours(1).truncatedTo(ChronoUnit.MINUTES);;
         Segment segment1 = new Segment(time1, time1.minusHours(1));

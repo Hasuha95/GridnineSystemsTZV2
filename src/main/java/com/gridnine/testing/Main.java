@@ -14,12 +14,11 @@ public class Main {
         new FutureDeparturesFilter().filter(FlightBuilder.createFlights()).forEach(System.out::println);
 
         // 2.	исключить вылеты, где имеются сегменты с датой прилёта раньше даты вылета
-        System.out.println("исключить вылеты, где имеются сегменты с датой прилёта раньше даты вылета Вариант1");
+        System.out.println("исключить вылеты, где имеются сегменты с датой прилёта раньше даты вылета");
         new ExcludeTimeZoneCollisionsFilter().filter(FlightBuilder.createFlights()).forEach(System.out::println);
 
         // 3.	исключить полёты, где общее время, проведённое на земле превышает два часа
         System.out.println("исключить полёты, где общее время, проведённое на земле превышает два часа");
         new ExcludeGroundTimeExceedsTwoHoursFilter().filter(FlightBuilder.createFlights()).forEach(System.out::println);
     }
-
 }

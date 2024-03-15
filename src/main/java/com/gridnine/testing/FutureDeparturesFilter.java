@@ -9,7 +9,15 @@ public class FutureDeparturesFilter implements FlightFilter{
     public List<Flight> filter(final List<Flight> flights) {
         return flights
                 .stream()
-                .filter((f) -> f.getSegments().get(0).getDepartureDate().isAfter(LocalDateTime.now()))
+                .filter((f) -> f.getSegments()
+                        .get(0)
+                        .getDepartureDate()
+                        .isAfter(LocalDateTime.now())
+                        ||
+                        f.getSegments()
+                                .get(0)
+                                .getDepartureDate()
+                                .equals(LocalDateTime.now()))
                 .collect(Collectors.toList());
     }
 }

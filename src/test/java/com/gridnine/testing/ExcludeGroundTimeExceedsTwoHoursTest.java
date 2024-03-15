@@ -12,7 +12,7 @@ import java.util.List;
 class ExcludeGroundTimeExceedsTwoHoursTest {
 
     @Test
-    void excludeFlightsInPast() {
+    void excludeFlightsWithGroundTimeExceedsTwoHours() {
         List<Flight> list = new ArrayList<>(Arrays.asList(getSimpleFlight(), getFlightWithGroundTimeExceedsTwoHours()));
         Assertions.assertEquals(new ExcludeGroundTimeExceedsTwoHoursFilter().filter(list),
                 new ArrayList<>(Arrays.asList(getSimpleFlight())));
@@ -20,9 +20,6 @@ class ExcludeGroundTimeExceedsTwoHoursTest {
 
 
 
-    /*
-    уже вылетел без пересадок
-    */
     Flight getSimpleFlight() {
         LocalDateTime time = LocalDateTime.now().minusHours(1).truncatedTo(ChronoUnit.MINUTES);;
         Segment segment = new Segment(time, time.plusHours(3));
@@ -33,9 +30,7 @@ class ExcludeGroundTimeExceedsTwoHoursTest {
         return flight;
     }
 
-    /*
-        летит со стоянкой более двух часов
-    */
+
     Flight getFlightWithGroundTimeExceedsTwoHours() {
         LocalDateTime time1 = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);;
         Segment segment1 = new Segment(time1, time1.plusHours(2));

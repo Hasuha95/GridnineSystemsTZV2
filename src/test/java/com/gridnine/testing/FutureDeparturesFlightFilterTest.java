@@ -21,9 +21,6 @@ class FutureDeparturesFlightFilterTest {
     }
 
 
-    /*
-    уже вылетел без пересадок
-    */
     Flight getSimpleFlight() {
         LocalDateTime time = LocalDateTime.now().minusHours(1).truncatedTo(ChronoUnit.MINUTES);;
         Segment segment = new Segment(time, time.plusHours(3));
@@ -34,9 +31,6 @@ class FutureDeparturesFlightFilterTest {
         return flight;
     }
 
-    /*
-       скоро летит
-    */
     Flight getFlightWithFutureDeparture() {
         LocalDateTime time1 = LocalDateTime.now().plusHours(1).truncatedTo(ChronoUnit.MINUTES);;
         Segment segment1 = new Segment(time1, time1.plusHours(3));
