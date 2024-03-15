@@ -1,15 +1,16 @@
 package com.gridnine.testing;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FutureDeparturesFlightFilter implements FlightFilter{
+public class ExcludeTimeZoneCollisionsFilter implements FlightFilter{
     @Override
     public List<Flight> filter(final List<Flight> flights) {
         return flights
                 .stream()
-                .filter((f) -> f.getSegments().get(0).getDepartureDate().isAfter(LocalDateTime.now()))
+                .filter((f) -> f.getSegments()
+                        .stream()
+                        .noneMatch((s) -> s.getArrivalDate().isBefore(s.getDepartureDate())))
                 .collect(Collectors.toList());
     }
 }

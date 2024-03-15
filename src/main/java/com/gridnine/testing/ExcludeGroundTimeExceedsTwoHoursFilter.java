@@ -3,13 +3,12 @@ package com.gridnine.testing;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ExcludeGroundTimeExceedsTwoHours implements FlightFilter{
+public class ExcludeGroundTimeExceedsTwoHoursFilter implements FlightFilter{
     @Override
-    public List<Flight> filter(final List<Flight> flights) {
-        List<Flight> flightList = new ArrayList<>(flights);
-
-        flightList.removeIf((f) -> {
+    public List<Flight> filter(final List<Flight> flightList) {
+        return flightList.stream().filter((f) -> {
             List<Segment> segments = f.getSegments();
             int sum = 0;
             for (int i = 0; i < segments.size() - 1; i++) {
@@ -17,11 +16,10 @@ public class ExcludeGroundTimeExceedsTwoHours implements FlightFilter{
                         , segments.get(i+1).getDepartureDate()).toMinutes();
             }
             if (sum > 120){
-                return true;
-            } else {
                 return false;
+            } else {
+                return true;
             }
-        });
-        return flightList;
+        }).collect(Collectors.toList());
     }
 }
